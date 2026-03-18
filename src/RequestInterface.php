@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Psr\Http\Message;
 
 /**
@@ -55,7 +57,6 @@ interface RequestInterface extends MessageInterface
      *     request-target forms allowed in request messages)
      */
     public function withRequestTarget(string $requestTarget): RequestInterface;
-
 
     /**
      * Retrieves the HTTP method of the request.
