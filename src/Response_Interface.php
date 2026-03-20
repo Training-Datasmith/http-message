@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Psr\Http\Message;
 
 /**
@@ -19,7 +18,7 @@ namespace Psr\Http\Message;
  * be implemented such that they retain the internal state of the current
  * message and return an instance that contains the changed state.
  */
-interface ResponseInterface extends MessageInterface
+interface Response_Interface extends Message_Interface
 {
     /**
      * Gets the response status code.
@@ -29,8 +28,7 @@ interface ResponseInterface extends MessageInterface
      *
      * @return int Status code.
      */
-    public function getStatusCode(): int;
-
+    public function get_status_code(): int;
     /**
      * Return an instance with the specified status code and, optionally, reason phrase.
      *
@@ -50,8 +48,7 @@ interface ResponseInterface extends MessageInterface
      *     use the defaults as suggested in the HTTP specification.
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    public function withStatus(int $code, string $reasonPhrase = ''): ResponseInterface;
-
+    public function with_status(int $code, string $reason_phrase = ''): Response_Interface;
     /**
      * Gets the response reason phrase associated with the status code.
      *
@@ -65,5 +62,5 @@ interface ResponseInterface extends MessageInterface
      * @link http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      * @return string Reason phrase; must return an empty string if none present.
      */
-    public function getReasonPhrase(): string;
+    public function get_reason_phrase(): string;
 }

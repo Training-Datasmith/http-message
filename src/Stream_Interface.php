@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Psr\Http\Message;
 
 /**
@@ -11,7 +10,7 @@ namespace Psr\Http\Message;
  * a wrapper around the most common operations, including serialization of
  * the entire stream to a string.
  */
-interface StreamInterface
+interface Stream_Interface
 {
     /**
      * Reads all data from the stream into a string, from the beginning to end.
@@ -27,12 +26,10 @@ interface StreamInterface
      * @see http://php.net/manual/en/language.oop5.magic.php#object.tostring
      */
     public function __toString(): string;
-
     /**
      * Closes the stream and any underlying resources.
      */
     public function close(): void;
-
     /**
      * Separates any underlying resources from the stream.
      *
@@ -41,14 +38,12 @@ interface StreamInterface
      * @return resource|null Underlying PHP stream, if any
      */
     public function detach();
-
     /**
      * Get the size of the stream if known.
      *
      * @return int|null Returns the size in bytes if known, or null if unknown.
      */
-    public function getSize(): ?int;
-
+    public function get_size(): ?int;
     /**
      * Returns the current position of the file read/write pointer
      *
@@ -56,17 +51,14 @@ interface StreamInterface
      * @throws \RuntimeException on error.
      */
     public function tell(): int;
-
     /**
      * Returns true if the stream is at the end of the stream.
      */
     public function eof(): bool;
-
     /**
      * Returns whether or not the stream is seekable.
      */
-    public function isSeekable(): bool;
-
+    public function is_seekable(): bool;
     /**
      * Seek to a position in the stream.
      *
@@ -80,7 +72,6 @@ interface StreamInterface
      * @throws \RuntimeException on failure.
      */
     public function seek(int $offset, int $whence = SEEK_SET): void;
-
     /**
      * Seek to the beginning of the stream.
      *
@@ -92,12 +83,10 @@ interface StreamInterface
      * @throws \RuntimeException on failure.
      */
     public function rewind(): void;
-
     /**
      * Returns whether or not the stream is writable.
      */
-    public function isWritable(): bool;
-
+    public function is_writable(): bool;
     /**
      * Write data to the stream.
      *
@@ -106,12 +95,10 @@ interface StreamInterface
      * @throws \RuntimeException on failure.
      */
     public function write(string $string): int;
-
     /**
      * Returns whether or not the stream is readable.
      */
-    public function isReadable(): bool;
-
+    public function is_readable(): bool;
     /**
      * Read data from the stream.
      *
@@ -123,15 +110,13 @@ interface StreamInterface
      * @throws \RuntimeException if an error occurs.
      */
     public function read(int $length): string;
-
     /**
      * Returns the remaining contents in a string
      *
      * @throws \RuntimeException if unable to read or an error occurs while
      *     reading.
      */
-    public function getContents(): string;
-
+    public function get_contents(): string;
     /**
      * Get stream metadata as an associative array or retrieve a specific key.
      *
@@ -144,5 +129,5 @@ interface StreamInterface
      *     provided. Returns a specific key value if a key is provided and the
      *     value is found, or null if the key is not found.
      */
-    public function getMetadata(?string $key = null);
+    public function get_metadata(?string $key = null);
 }

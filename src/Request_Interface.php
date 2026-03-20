@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Psr\Http\Message;
 
 /**
@@ -23,7 +22,7 @@ namespace Psr\Http\Message;
  * be implemented such that they retain the internal state of the current
  * message and return an instance that contains the changed state.
  */
-interface RequestInterface extends MessageInterface
+interface Request_Interface extends Message_Interface
 {
     /**
      * Retrieves the message's request target.
@@ -39,8 +38,7 @@ interface RequestInterface extends MessageInterface
      * If no URI is available, and no request-target has been specifically
      * provided, this method MUST return the string "/".
      */
-    public function getRequestTarget(): string;
-
+    public function get_request_target(): string;
     /**
      * Return an instance with the specific request-target.
      *
@@ -56,15 +54,13 @@ interface RequestInterface extends MessageInterface
      * @link http://tools.ietf.org/html/rfc7230#section-5.3 (for the various
      *     request-target forms allowed in request messages)
      */
-    public function withRequestTarget(string $requestTarget): RequestInterface;
-
+    public function with_request_target(string $request_target): Request_Interface;
     /**
      * Retrieves the HTTP method of the request.
      *
      * @return string Returns the request method.
      */
-    public function getMethod(): string;
-
+    public function get_method(): string;
     /**
      * Return an instance with the provided HTTP method.
      *
@@ -79,8 +75,7 @@ interface RequestInterface extends MessageInterface
      * @param string $method Case-sensitive method.
      * @throws \InvalidArgumentException for invalid HTTP methods.
      */
-    public function withMethod(string $method): RequestInterface;
-
+    public function with_method(string $method): Request_Interface;
     /**
      * Retrieves the URI instance.
      *
@@ -90,8 +85,7 @@ interface RequestInterface extends MessageInterface
      * @return UriInterface Returns a UriInterface instance
      *     representing the URI of the request.
      */
-    public function getUri(): UriInterface;
-
+    public function get_uri(): Uri_Interface;
     /**
      * Returns an instance with the provided URI.
      *
@@ -121,5 +115,5 @@ interface RequestInterface extends MessageInterface
      * @param UriInterface $uri New request URI to use.
      * @param bool $preserveHost Preserve the original state of the Host header.
      */
-    public function withUri(UriInterface $uri, bool $preserveHost = false): RequestInterface;
+    public function with_uri(Uri_Interface $uri, bool $preserve_host = false): Request_Interface;
 }

@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Psr\Http\Message;
 
 /**
@@ -42,7 +41,7 @@ namespace Psr\Http\Message;
  * be implemented such that they retain the internal state of the current
  * message and return an instance that contains the changed state.
  */
-interface ServerRequestInterface extends RequestInterface
+interface Server_Request_Interface extends Request_Interface
 {
     /**
      * Retrieve server parameters.
@@ -51,8 +50,7 @@ interface ServerRequestInterface extends RequestInterface
      * typically derived from PHP's $_SERVER superglobal. The data IS NOT
      * REQUIRED to originate from $_SERVER.
      */
-    public function getServerParams(): array;
-
+    public function get_server_params(): array;
     /**
      * Retrieve cookies.
      *
@@ -61,8 +59,7 @@ interface ServerRequestInterface extends RequestInterface
      * The data MUST be compatible with the structure of the $_COOKIE
      * superglobal.
      */
-    public function getCookieParams(): array;
-
+    public function get_cookie_params(): array;
     /**
      * Return an instance with the specified cookies.
      *
@@ -79,8 +76,7 @@ interface ServerRequestInterface extends RequestInterface
      *
      * @param array $cookies Array of key/value pairs representing cookies.
      */
-    public function withCookieParams(array $cookies): ServerRequestInterface;
-
+    public function with_cookie_params(array $cookies): Server_Request_Interface;
     /**
      * Retrieve query string arguments.
      *
@@ -91,8 +87,7 @@ interface ServerRequestInterface extends RequestInterface
      * values, you may need to parse the query string from `getUri()->getQuery()`
      * or from the `QUERY_STRING` server param.
      */
-    public function getQueryParams(): array;
-
+    public function get_query_params(): array;
     /**
      * Return an instance with the specified query string arguments.
      *
@@ -114,8 +109,7 @@ interface ServerRequestInterface extends RequestInterface
      * @param array $query Array of query string arguments, typically from
      *     $_GET.
      */
-    public function withQueryParams(array $query): ServerRequestInterface;
-
+    public function with_query_params(array $query): Server_Request_Interface;
     /**
      * Retrieve normalized file upload data.
      *
@@ -128,8 +122,7 @@ interface ServerRequestInterface extends RequestInterface
      * @return array An array tree of UploadedFileInterface instances; an empty
      *     array MUST be returned if no data is present.
      */
-    public function getUploadedFiles(): array;
-
+    public function get_uploaded_files(): array;
     /**
      * Create a new instance with the specified uploaded files.
      *
@@ -140,8 +133,7 @@ interface ServerRequestInterface extends RequestInterface
      * @param array $uploadedFiles An array tree of UploadedFileInterface instances.
      * @throws \InvalidArgumentException if an invalid structure is provided.
      */
-    public function withUploadedFiles(array $uploadedFiles): ServerRequestInterface;
-
+    public function with_uploaded_files(array $uploaded_files): Server_Request_Interface;
     /**
      * Retrieve any parameters provided in the request body.
      *
@@ -157,8 +149,7 @@ interface ServerRequestInterface extends RequestInterface
      * @return null|array|object The deserialized body parameters, if any.
      *     These will typically be an array or object.
      */
-    public function getParsedBody();
-
+    public function get_parsed_body();
     /**
      * Return an instance with the specified body parameters.
      *
@@ -186,8 +177,7 @@ interface ServerRequestInterface extends RequestInterface
      * @throws \InvalidArgumentException if an unsupported argument type is
      *     provided.
      */
-    public function withParsedBody($data): ServerRequestInterface;
-
+    public function with_parsed_body($data): Server_Request_Interface;
     /**
      * Retrieve attributes derived from the request.
      *
@@ -199,8 +189,7 @@ interface ServerRequestInterface extends RequestInterface
      *
      * @return array Attributes derived from the request.
      */
-    public function getAttributes(): array;
-
+    public function get_attributes(): array;
     /**
      * Retrieve a single derived request attribute.
      *
@@ -216,8 +205,7 @@ interface ServerRequestInterface extends RequestInterface
      * @param mixed $default Default value to return if the attribute does not exist.
      * @return mixed
      */
-    public function getAttribute(string $name, $default = null);
-
+    public function get_attribute(string $name, $default = null);
     /**
      * Return an instance with the specified derived request attribute.
      *
@@ -232,8 +220,7 @@ interface ServerRequestInterface extends RequestInterface
      * @param string $name The attribute name.
      * @param mixed $value The value of the attribute.
      */
-    public function withAttribute(string $name, $value): ServerRequestInterface;
-
+    public function with_attribute(string $name, $value): Server_Request_Interface;
     /**
      * Return an instance that removes the specified derived request attribute.
      *
@@ -247,5 +234,5 @@ interface ServerRequestInterface extends RequestInterface
      * @see getAttributes()
      * @param string $name The attribute name.
      */
-    public function withoutAttribute(string $name): ServerRequestInterface;
+    public function without_attribute(string $name): Server_Request_Interface;
 }
