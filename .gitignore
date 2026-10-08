@@ -1,0 +1,6 @@
+/composer.lock
+/vendor/
+/composer.phar
+/.phpunit.result.cache
+/composer-setup.php
+/composer-setup.sig

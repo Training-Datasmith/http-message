@@ -18,6 +18,14 @@
             "Psr\\Http\\Message\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Psr\\Http\\Message\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8.5.56"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.0.x-dev"
