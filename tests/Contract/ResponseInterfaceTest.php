@@ -46,9 +46,9 @@ final class ResponseInterfaceTest extends TestCase
     public function testNormativeDocblocksAndThrows(): void
     {
         $class = new ReflectionClass(self::FQN);
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getReasonPhrase'),
-            'must return an empty string'
+            '/must return an empty string/si'
         );
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('withStatus'), '\\InvalidArgumentException');
     }

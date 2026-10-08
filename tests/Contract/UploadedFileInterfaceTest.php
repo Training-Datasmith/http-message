@@ -37,21 +37,21 @@ final class UploadedFileInterfaceTest extends TestCase
     public function testNormativeDocblocksAndThrows(): void
     {
         $class = new ReflectionClass(self::FQN);
-        ReflectionTestSupport::assertClassDocContainsNormativeOrThrows($class, 'immutable');
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertClassDocMatchesNormativePattern($class, '/considered immutable/s');
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getStream'),
-            'moveTo() method has been called previously'
+            '/moveTo\(\) method has been called previously, this method MUST raise/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('moveTo'),
-            'subsequent calls MUST raise'
+            '/subsequent calls MUST raise/s'
         );
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('getStream'), '\\RuntimeException');
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('moveTo'), '\\InvalidArgumentException');
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('moveTo'), '\\RuntimeException');
-        $getErrorDoc = $class->getMethod('getError')->getDocComment();
-        self::assertNotFalse($getErrorDoc);
-        self::assertStringContainsString('MUST return', $getErrorDoc);
-        self::assertStringContainsString('UPLOAD_ERR_OK', $getErrorDoc);
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
+            $class->getMethod('getError'),
+            '/MUST return' . ReflectionTestSupport::DOC_SEPARATOR . 'UPLOAD_ERR_OK/s'
+        );
     }
 }

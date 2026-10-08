@@ -97,17 +97,17 @@ final class ServerRequestInterfaceTest extends TestCase
     public function testNormativeDocblocksAndThrows(): void
     {
         $class = new ReflectionClass(self::FQN);
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('withCookieParams'),
-            'MUST NOT update the related Cookie header'
+            '/MUST NOT update the related Cookie header/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('withQueryParams'),
-            'MUST NOT change the URI'
+            '/MUST NOT change the URI/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getUploadedFiles'),
-            'MUST be returned if no data is present'
+            '/empty' . ReflectionTestSupport::DOC_SEPARATOR . 'array MUST be returned if no data is present/s'
         );
         ReflectionTestSupport::assertThrowsTagDocuments(
             $class->getMethod('withUploadedFiles'),

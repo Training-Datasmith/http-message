@@ -79,26 +79,26 @@ final class UriInterfaceTest extends TestCase
     public function testNormativeDocblocksAndThrows(): void
     {
         $class = new ReflectionClass(self::FQN);
-        ReflectionTestSupport::assertClassDocContainsNormativeOrThrows($class, 'immutable');
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertClassDocMatchesNormativePattern($class, '/considered immutable/s');
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getScheme'),
-            'MUST be normalized to lowercase'
+            '/returned MUST be normalized to lowercase/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getAuthority'),
-            'SHOULD NOT be included'
+            '/SHOULD NOT be included/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getHost'),
-            'MUST be normalized to lowercase'
+            '/returned MUST be normalized to lowercase/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getPort'),
-            'SHOULD return null'
+            '/this method SHOULD return null/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getPath'),
-            'MUST NOT automatically'
+            '/this method MUST NOT automatically/s'
         );
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('withScheme'), '\\InvalidArgumentException');
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('withHost'), '\\InvalidArgumentException');

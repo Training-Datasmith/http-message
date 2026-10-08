@@ -11,6 +11,8 @@ use ReflectionNamedType;
 
 final class ReflectionTestSupport
 {
+    /** Spaces and docblock continuation markers between tokens. */
+    public const DOC_SEPARATOR = '(?:\s|\*\s*)+';
     /**
      * @param list<array{name: string, type?: ?string, class?: ?string, nullable?: bool, optional?: bool, default?: mixed, defaultConstant?: ?string}> $parameters
      */
@@ -92,11 +94,25 @@ final class ReflectionTestSupport
         Assert::assertStringContainsString($needle, $doc);
     }
 
+    public static function assertDocMatchesNormativePattern(ReflectionMethod $method, string $pattern): void
+    {
+        $doc = $method->getDocComment();
+        Assert::assertNotFalse($doc);
+        Assert::assertRegExp($pattern, $doc);
+    }
+
     public static function assertClassDocContainsNormativeOrThrows(ReflectionClass $class, string $needle): void
     {
         $doc = $class->getDocComment();
         Assert::assertNotFalse($doc);
         Assert::assertStringContainsString($needle, $doc);
+    }
+
+    public static function assertClassDocMatchesNormativePattern(ReflectionClass $class, string $pattern): void
+    {
+        $doc = $class->getDocComment();
+        Assert::assertNotFalse($doc);
+        Assert::assertRegExp($pattern, $doc);
     }
 
     public static function assertThrowsTagDocuments(ReflectionMethod $method, string $exceptionClass): void

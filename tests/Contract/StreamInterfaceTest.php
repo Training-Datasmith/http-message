@@ -93,13 +93,13 @@ final class StreamInterfaceTest extends TestCase
     public function testNormativeDocblocksAndThrows(): void
     {
         $class = new ReflectionClass(self::FQN);
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('__toString'),
-            'MUST NOT raise an exception'
+            '/MUST NOT raise an exception/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('__toString'),
-            'MUST attempt to seek to the beginning'
+            '/MUST attempt to seek to the beginning/s'
         );
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('tell'), '\\RuntimeException');
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('seek'), '\\RuntimeException');

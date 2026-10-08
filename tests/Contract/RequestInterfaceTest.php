@@ -76,25 +76,25 @@ final class RequestInterfaceTest extends TestCase
     public function testNormativeDocblocksAndThrows(): void
     {
         $class = new ReflectionClass(self::FQN);
-        ReflectionTestSupport::assertClassDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertClassDocMatchesNormativePattern(
             $class,
-            'MUST attempt to set the Host header'
+            '/MUST attempt to set the Host header/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getRequestTarget'),
-            'MUST return the string "/"'
+            '/MUST return the string "\/"/s'
         );
-        $withMethodDoc = $class->getMethod('withMethod')->getDocComment();
-        self::assertNotFalse($withMethodDoc);
-        self::assertStringContainsString('SHOULD NOT', $withMethodDoc);
-        self::assertStringContainsString('modify the given string', $withMethodDoc);
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
-            $class->getMethod('withUri'),
-            'MUST update the Host header'
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
+            $class->getMethod('withMethod'),
+            '/SHOULD NOT' . ReflectionTestSupport::DOC_SEPARATOR . 'modify the given string/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('withUri'),
-            'MUST NOT update the Host header'
+            '/this method MUST update the Host header/s'
+        );
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
+            $class->getMethod('withUri'),
+            '/this method MUST NOT update the Host header/s'
         );
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('withMethod'), '\\InvalidArgumentException');
     }

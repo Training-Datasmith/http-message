@@ -75,23 +75,23 @@ final class MessageInterfaceTest extends TestCase
     public function testNormativeDocblocksAndThrows(): void
     {
         $class = new ReflectionClass(self::FQN);
-        ReflectionTestSupport::assertClassDocContainsNormativeOrThrows($class, 'immutable');
+        ReflectionTestSupport::assertClassDocMatchesNormativePattern($class, '/Messages are considered immutable/s');
 
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getProtocolVersion'),
-            'MUST contain only the HTTP version number'
+            '/MUST contain only the HTTP version number/s'
         );
-        $getHeaderDoc = $class->getMethod('getHeader')->getDocComment();
-        self::assertNotFalse($getHeaderDoc);
-        self::assertStringContainsString('MUST', $getHeaderDoc);
-        self::assertStringContainsString('empty array', $getHeaderDoc);
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
+            $class->getMethod('getHeader'),
+            '/MUST' . ReflectionTestSupport::DOC_SEPARATOR . 'return' . ReflectionTestSupport::DOC_SEPARATOR . 'an' . ReflectionTestSupport::DOC_SEPARATOR . 'empty' . ReflectionTestSupport::DOC_SEPARATOR . 'array/s'
+        );
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('getHeaderLine'),
-            'MUST return an empty string'
+            '/MUST' . ReflectionTestSupport::DOC_SEPARATOR . 'return' . ReflectionTestSupport::DOC_SEPARATOR . 'an' . ReflectionTestSupport::DOC_SEPARATOR . 'empty' . ReflectionTestSupport::DOC_SEPARATOR . 'string/s'
         );
-        ReflectionTestSupport::assertDocContainsNormativeOrThrows(
+        ReflectionTestSupport::assertDocMatchesNormativePattern(
             $class->getMethod('withoutHeader'),
-            'MUST be done without case-sensitivity'
+            '/MUST be done without case-sensitivity/s'
         );
 
         ReflectionTestSupport::assertThrowsTagDocuments($class->getMethod('withHeader'), '\\InvalidArgumentException');
